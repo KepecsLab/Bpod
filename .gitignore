@@ -3,3 +3,4 @@ Data/**
 Protocols/**
 .gitmodules
 *BpodUserPath.txt
+*.asv
