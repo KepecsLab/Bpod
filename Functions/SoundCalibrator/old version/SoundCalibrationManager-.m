@@ -55,20 +55,11 @@ function SoundCalibrationManager_OpeningFcn(hObject, eventdata, handles, varargi
 global BpodSystem
 if ispc % Start the MCC board with PsychToolbox
     BpodSystem.PluginObjects.USB1608G = struct;
-%     warning off; BpodSystem.PluginObjects.USB1608G.Board = analoginput('mcc', 0); warning on;
-        warning off; BpodSystem.PluginObjects.USB1608G.Board = daq.createSession('mcc'); warning on;
-
-   % BpodSystem.PluginObjects.USB1608G.Board.SampleRate = 200000;
-      BpodSystem.PluginObjects.USB1608G.Board.Rate = 200000;
-
-    %BpodSystem.PluginObjects.USB1608G.Board.SamplesPerTrigger = 200000*.3;
-    
- %   BpodSystem.PluginObjects.USB1608G.Ch0 = addchannel(BpodSystem.PluginObjects.USB1608G.Board, 0);
-     BpodSystem.PluginObjects.USB1608G.Ch0 = addAnalogInputChannel(BpodSystem.PluginObjects.USB1608G.Board,'Board0',0,'Voltage');
-   
- %BpodSystem.PluginObjects.USB1608G.Ch0.InputRange = [-10 10];
-  BpodSystem.PluginObjects.USB1608G.Ch0.Range = [-10 10];
-
+    warning off; BpodSystem.PluginObjects.USB1608G.Board = analoginput('mcc', 0); warning on;
+    BpodSystem.PluginObjects.USB1608G.Board.SampleRate = 200000;
+    BpodSystem.PluginObjects.USB1608G.Board.SamplesPerTrigger = 200000*.3;
+    BpodSystem.PluginObjects.USB1608G.Ch0 = addchannel(BpodSystem.PluginObjects.USB1608G.Board, 0);
+    BpodSystem.PluginObjects.USB1608G.Ch0.InputRange = [-10 10];
 end
 % Choose default command line output for SoundCalibrationManager
 handles.output = hObject;

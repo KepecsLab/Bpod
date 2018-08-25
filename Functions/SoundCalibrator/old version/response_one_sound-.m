@@ -42,11 +42,9 @@ PsychToolboxSoundServer('Play', 1);
 
 pause(0.1);
 if ispc
-    %start(BpodSystem.PluginObjects.USB1608G.Board);
-    %pause(.5);
-    %RawSignal = getdata(BpodSystem.PluginObjects.USB1608G.Board)';
-    [RawSignal]=startForeground(BpodSystem.PluginObjects.USB1608G.Board);
-
+    start(BpodSystem.PluginObjects.USB1608G.Board);
+    pause(.5);
+    RawSignal = getdata(BpodSystem.PluginObjects.USB1608G.Board)';
 else
     data = mcc_daq('n_scan',n_data,'freq',Parameters.FsIn,'n_chan',n_chan);
     RawSignal = data(channel,:); 

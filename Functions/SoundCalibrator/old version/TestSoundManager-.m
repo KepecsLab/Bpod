@@ -112,20 +112,19 @@ tvec = 0:1/fsOut:toneDuration;
 
 CalFilePath = get(handles.filename_edit, 'String');
 try
-    load(CalFilePath); % Creates local variable "SoundCal", a struct with the cal table and coefficients
+    open(CalFilePath); % Creates local variable "SoundCal", a struct with the cal table and coefficients
 catch
     error('Could not open calibration file');
 end
 frequency = str2double(get(handles.frequency_edit, 'String'));
-handles.speaker = get(handles.speaker1, 'Value');
-if handles.speaker == 0 % Other radio button is selected
-    handles.speaker = 2;
+speaker = get(handles.speaker1, 'Value');
+if speaker == 0 % Other radio button is selected
+    speaker = 2;
 end
 % Attenuation for this frequency at Target SPL
 toneAtt = polyval(SoundCal(1,handles.speaker).Coefficient,frequency);
 
-
-diffSPL = str2double(handles.volume_edit.String) - SoundCal(1,handles.speaker).TargetSPL;
+diffSPL = str2double(handles.volume_edit.String) - SoundCal(1,speaker).TargetSPL;
 attFactor = sqrt(10^(diffSPL/10));
 
 amplitude = toneAtt*attFactor;
